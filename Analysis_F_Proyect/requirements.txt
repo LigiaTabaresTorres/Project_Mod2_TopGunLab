@@ -1,2 +1,5 @@
 django
 djangorestframework
+psicopg2
+python-dotenv
+gunicorn

@@ -10,15 +10,13 @@ class Evaluation(models.Model):
 class FinancialData(models.Model):
 	evaluation_id = models.ForeignKey(Evaluation, on_delete=models.CASCADE, null=False)
 	year = models.IntegerField()
-	data = models.CharField(max_length=100)
 	activos_corrientes = models.FloatField(default=0.0)
 	pasivos_corrientes = models.FloatField(default=0.0)
 	inventario = models.FloatField(default=0.0)
 	efectivo = models.FloatField(default=0.0)
 	deuda_pasivos = models.FloatField(default=0.0)
 	patrimonio = models.FloatField(default=0.0)
-	costos = models.FloatField(default=0.0)
-	precio_inventario_promedio = models.FloatField(default=0.0)
+	rotacion_inventario = models.FloatField(default=0.0)
 	ventas = models.FloatField(default=0.0)
 	activo_fijo = models.FloatField(default=0.0)
 	beneficio_neto = models.FloatField(default=0.0)
@@ -38,7 +36,7 @@ class Indicator(models.Model):
 	update_time = models.DateTimeField(default=timezone.now)
 
 class IndicatorValue(models.Model):
-	Indicator_id = models.ForeignKey(Indicator, on_delete=models.CASCADE)
+	Indicator_id = models.ManyToManyField(to=Indicator)
 	FinancialData_id = models.ForeignKey(FinancialData, on_delete=models.CASCADE)
 	value = models.FloatField(default=0.0)
 	create_time = models.DateTimeField(default=timezone.now)
