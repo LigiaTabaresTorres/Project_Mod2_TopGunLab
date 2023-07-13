@@ -26,22 +26,22 @@ class Indexes:
     }  
 
     self.Eficiencia = {
-      'rotacion_inventario': self.fin_info.get('rotacion_inventario', 0),
-      'ventas': self.fin_info.get('ventas', 0),
-      'activo_fijo': self.fin_info.get('activo_fijo', 0),
+      'rotacion_inventario': self.fin_info.get('rotacion_inventario', 1),
+      'ventas': self.fin_info.get('ventas', 1),
+      'activo_fijo': self.fin_info.get('activo_fijo', 1),
     }
 
     self.Rentabilidad = {
       'beneficio_neto': self.fin_info.get('beneficio_neto', 0),
-      'patrimonio': self.fin_info.get('patrimonio', 0),
+      'patrimonio': self.fin_info.get('patrimonio', 1),
     }
 
     self.Valuacion = {
       'beneficio_neto': self.fin_info.get('beneficio_neto', 0),
 	    'dividendos': self.fin_info.get('dividendos', 0),
-	    'acciones_totales': self.fin_info.get('acciones_totales', 0),
+	    'acciones_totales': self.fin_info.get('acciones_totales', 1),
       'precio_acción': self.fin_info.get('precio_acción', 0),
-      'acciones_propias': self.fin_info.get('acciones_propias', 0),
+      'acciones_propias': self.fin_info.get('acciones_propias', 1),
       'patrimonio': self.fin_info.get('patrimonio', 1),
     }
 
@@ -50,6 +50,7 @@ class Indexes:
   #Indicadores de Liquidez
   def current_ratio(self):
     current_ratio = self.Liquidez.get('activos_corrientes')/self.Liquidez.get('pasivos_corrientes')
+    print(current_ratio)
     self.value.update({
       'current_ratio': current_ratio,
     })

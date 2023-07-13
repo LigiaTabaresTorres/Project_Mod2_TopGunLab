@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Evaluation, FinancialData, Indicator, IndicatorValue
+from .models import Evaluation, FinancialData, Indicator, IndicatorValue, User
 
 class Evaluation_Serializer(serializers.ModelSerializer):
   class Meta:
@@ -18,4 +18,8 @@ class Indicator_Serializer(serializers.ModelSerializer):
 class IndicatorValue_Serializer(serializers.ModelSerializer):
   class Meta:
     model = IndicatorValue
+    fields = '__all__'    
+class User_Serializer(serializers.ModelSerializer):
+  class Meta:
+    model = User
     fields = '__all__'    

@@ -2,13 +2,13 @@ from django.db import models
 from django.utils import timezone
 
 class Evaluation(models.Model):
-	name = models.CharField(max_length=100, unique=True, blank=True)
-	symbol = models.CharField(max_length=10, unique=True)
-	create_time = models.DateTimeField(default=timezone.now)
-	update_time = models.DateTimeField(default=timezone.now)
+	name = models.CharField(max_length=100, unique=False, blank=True)
+	symbol = models.CharField(max_length=10, unique=False)
+	create_time = models.DateTimeField()
+	update_time = models.DateTimeField()
 
 class FinancialData(models.Model):
-	evaluation_id = models.ForeignKey(Evaluation, on_delete=models.CASCADE, null=False)
+	evaluation_id = models.ForeignKey(to=Evaluation, on_delete=models.CASCADE, null=False)
 	year = models.IntegerField()
 	activos_corrientes = models.FloatField(default=0.0)
 	pasivos_corrientes = models.FloatField(default=0.0)
@@ -24,23 +24,33 @@ class FinancialData(models.Model):
 	acciones_totales = models.FloatField(default=0.0)
 	precio_acción = models.FloatField(default=0.0)
 	acciones_propias = models.FloatField(default=0.0)
-	create_time = models.DateTimeField(default=timezone.now)
-	update_time = models.DateTimeField(default=timezone.now)
+	create_time = models.DateTimeField()
+	update_time = models.DateTimeField()
 
 class Indicator(models.Model):
 	name = models.CharField(max_length=100)
 	description = models.TextField()
 	type_index = models.CharField(max_length=100, null=True)
 	formula = models.CharField(max_length=100)
-	create_time = models.DateTimeField(default=timezone.now)
-	update_time = models.DateTimeField(default=timezone.now)
+	create_time = models.DateTimeField()
+	update_time = models.DateTimeField()
 
 class IndicatorValue(models.Model):
 	Indicator_id = models.ManyToManyField(to=Indicator)
-	FinancialData_id = models.ForeignKey(FinancialData, on_delete=models.CASCADE)
+	FinancialData_id = models.ForeignKey(to=FinancialData, on_delete=models.CASCADE)
 	value = models.FloatField(default=0.0)
-	create_time = models.DateTimeField(default=timezone.now)
-	update_time = models.DateTimeField(default=timezone.now)
+	create_time = models.DateTimeField()
+	update_time = models.DateTimeField()
+
+class User(models.Model):
+	user_name = models.CharField(max_length=100, unique=True, blank=True)
+	password = models.CharField(max_length=100, unique=True, blank=True)
+	email = models.CharField(max_length=100, unique=True, blank=True)
+	create_time = models.DateTimeField()
+	update_time = models.DateTimeField()
+
+
+
 
 # Explicación del modelo:
 

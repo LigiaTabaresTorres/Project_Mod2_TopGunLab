@@ -1,5 +1,7 @@
 django
 djangorestframework
-psicopg2
+djangorestframework_simplejwt
+psycopg2
 python-dotenv
 gunicorn
+dj-database-url
